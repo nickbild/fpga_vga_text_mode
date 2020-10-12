@@ -215,6 +215,7 @@ module top (
 
       char_set[0] <= 80'b01010101010101010101010101010101010101010101010101010101010101010101010101010101;
       char_set[1] <= 80'b11110000111100001111000011110000111100001111000011110000111100001111000011110000;
+      char_set[2] <= 80'b00000000000000000000000000000000000000000000000000000000000000000000000000000000;
 
       char_display[0] <= 5'b00000;
       char_display[1] <= 5'b00001;
@@ -223,6 +224,11 @@ module top (
       char_display[4] <= 5'b00000;
       char_display[5] <= 5'b00001;
       char_display[6] <= 5'b00000;
+
+      char_display[7] <= 5'b00001;
+      char_display[8] <= 5'b00000;
+      char_display[9] <= 5'b00001;
+      char_display[10] <= 5'b00010;
     end
 
     reg [5:0] char_num;
@@ -255,7 +261,7 @@ module top (
     	end else // Active video.
       begin
         // which char?
-        char_num <= (h_counter / 8) + (400 * (v_counter / 20));
+        char_num <= (h_counter / 8) + (50 * (v_counter / 20));
 
         // index into char h?
         h_idx <= h_counter % 8;
