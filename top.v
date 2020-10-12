@@ -112,7 +112,6 @@ module top (
     reg [14:0] absolute_addr;
     wire [10:0] raddr;
     assign raddr = {1'b0, absolute_addr[9:0]};
-    reg display;
 
     reg write_en1;
     reg write_en2;
@@ -199,6 +198,11 @@ module top (
       .BYPASS(1'b0)
     );
 
+    // reg [7:0] a[0:3] will give you a 4x8 bit array (=4x1 byte array)
+    // third bit of the 2nd byte is a[1][2]
+    reg [79:0] char_set [0:50];
+    reg [5:0] char_display [0:1500];
+
     initial begin
       h_counter <= 0;
       v_counter <= 0;
@@ -208,7 +212,22 @@ module top (
       red <= 0;
       green <= 0;
       blue <= 0;
+
+      char_set[0] <= 80'b01010101010101010101010101010101010101010101010101010101010101010101010101010101;
+      char_set[1] <= 80'b11110000111100001111000011110000111100001111000011110000111100001111000011110000;
+
+      char_display[0] <= 5'b00000;
+      char_display[1] <= 5'b00001;
+      char_display[2] <= 5'b00000;
+      char_display[3] <= 5'b00001;
+      char_display[4] <= 5'b00000;
+      char_display[5] <= 5'b00001;
+      char_display[6] <= 5'b00000;
     end
+
+    reg [5:0] char_num;
+    reg [10:0] h_idx;
+    reg [10:0] v_idx;
 
     always @(posedge clk_20mhz) begin
       // Horitonal sync.
@@ -235,9 +254,23 @@ module top (
         blue <= 0;
     	end else // Active video.
       begin
-        red <= 1;
-        green <= 1;
-        blue <= 1;
+        // which char?
+        char_num <= (h_counter / 8) + (400 * (v_counter / 20));
+
+        // index into char h?
+        h_idx <= h_counter % 8;
+
+        // index into char v?
+        v_idx <= (v_counter % 20) / 2;
+
+        red <= 0;
+        green <= 0;
+        blue <= 0;
+
+        if (char_set[char_display[char_num]][h_idx + (v_idx * 8)] == 1'b1)
+        begin
+          red <= 1;
+        end
       end
 
       // Increment / reset counters.
