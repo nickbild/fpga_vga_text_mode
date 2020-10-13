@@ -7,13 +7,13 @@ Coming soon!
 ## Media
 
 Example screenshot:
-![MiniVGA](https://raw.githubusercontent.com/nickbild/fpga_vga_text_mode/master/media/screen_sm.jpg)
+![MiniVGA](https://raw.githubusercontent.com/nickbild/fpga_vga_text_mode/main/media/screen_sm.jpg)
 
 TinyFPGA BX and Arduino, angle:
-![MiniVGA](https://raw.githubusercontent.com/nickbild/fpga_vga_text_mode/master/media/angle_sm.jpg)
+![MiniVGA](https://raw.githubusercontent.com/nickbild/fpga_vga_text_mode/main/media/angle_sm.jpg)
 
 TinyFPGA BX and Arduino, top:
-![MiniVGA](https://raw.githubusercontent.com/nickbild/fpga_vga_text_mode/master/media/top_sm.jpg)
+![MiniVGA](https://raw.githubusercontent.com/nickbild/fpga_vga_text_mode/main/media/top_sm.jpg)
 
 ## Bill of Materials
 
