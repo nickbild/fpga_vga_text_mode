@@ -225,9 +225,6 @@ module top (
         char_display[i] <= 58;
       end
 
-      // char_display[51] <= 0;
-      // char_display[1448] <= 53;
-
     end
 
     ////
@@ -305,11 +302,17 @@ module top (
     ////
 
     reg interrupt_active;
+    reg [10:0] screen_position;
+    reg [5:0] char_selection;
+
     always @(negedge clk_20mhz) begin
       if (interrupt && !interrupt_active) begin
         interrupt_active = 1;
 
-        // Load memory here.
+        // Set character to display, and position.
+        char_selection = {char_in_5, char_in_4, char_in_3, char_in_2, char_in_1, char_in_0};
+        screen_position = {a10, a9, a8, a7, a6, a5, a4, a3, a2, a1, a0};
+        char_display[screen_position] <= char_selection;
 
         interrupt_active = 0;
       end
