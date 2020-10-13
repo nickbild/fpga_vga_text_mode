@@ -203,6 +203,8 @@ module top (
     reg [79:0] char_set [0:58];
     reg [5:0] char_display [0:1500];
 
+    integer i;
+
     initial begin
       h_counter <= 0;
       v_counter <= 0;
@@ -272,21 +274,75 @@ module top (
       char_set[56] <= 80'b00000000011111100111111001111110011111100111111001111110011111100111111000000000; // cursor
       char_set[57] <= 80'b00000000000000000000000000000000000000000000000000000000000000000000000000000000; // blank
 
-      char_display[0] <= 5'b00000;
-      char_display[1] <= 5'b00001;
-      char_display[2] <= 5'b00010;
-      char_display[3] <= 5'b00011;
-      char_display[4] <= 5'b00100;
-      char_display[5] <= 5'b00101;
-      char_display[6] <= 5'b00110;
-      char_display[7] <= 5'b00111;
-      char_display[8] <= 5'b01000;
-      char_display[9] <= 5'b01001;
-      char_display[10] <= 5'b01010;
-      char_display[11] <= 5'b01011;
+      char_display[0] <= 0;
+      char_display[1] <= 1;
+      char_display[2] <= 2;
+      char_display[3] <= 3;
+      char_display[4] <= 4;
+      char_display[5] <= 5;
+      char_display[6] <= 6;
+      char_display[7] <= 7;
+      char_display[8] <= 8;
+      char_display[9] <= 9;
+      char_display[10] <= 10;
+      char_display[11] <= 11;
+      char_display[12] <= 12;
+      char_display[13] <= 13;
+      char_display[14] <= 14;
+      char_display[15] <= 15;
+      char_display[16] <= 16;
+      char_display[17] <= 17;
+      char_display[18] <= 18;
+      char_display[19] <= 19;
+      char_display[20] <= 20;
+      char_display[21] <= 21;
+      char_display[22] <= 22;
+      char_display[23] <= 23;
+      char_display[24] <= 24;
+      char_display[25] <= 25;
+      char_display[26] <= 26;
+      char_display[27] <= 27;
+      char_display[28] <= 28;
+      char_display[29] <= 29;
+      char_display[30] <= 30;
+      char_display[31] <= 31;
+      char_display[32] <= 32;
+      char_display[33] <= 33;
+      char_display[34] <= 34;
+      char_display[35] <= 35;
+      char_display[36] <= 36;
+      char_display[37] <= 37;
+      char_display[38] <= 38;
+      char_display[39] <= 39;
+      char_display[40] <= 40;
+      char_display[41] <= 41;
+      char_display[42] <= 42;
+      char_display[43] <= 43;
+      char_display[44] <= 44;
+      char_display[45] <= 45;
+      char_display[46] <= 46;
+      char_display[47] <= 47;
+      char_display[48] <= 48;
+      char_display[49] <= 49;
+      char_display[50] <= 50;
+      char_display[51] <= 51;
+      char_display[52] <= 52;
+      char_display[53] <= 53;
+      char_display[54] <= 54;
+      char_display[55] <= 55;
+      char_display[56] <= 56;
+      char_display[57] <= 57;
+
+      for( i = 58; i < 1499; i = i + 1 )
+      begin
+        char_display[i] <= 56;
+      end
+
+      char_display[1499] <= 0;
+
     end
 
-    reg [5:0] char_num;
+    reg [10:0] char_num;
     reg [10:0] h_idx;
     reg [10:0] v_idx;
 
