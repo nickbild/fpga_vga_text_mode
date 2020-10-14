@@ -15,7 +15,7 @@ The interface consists of an 11 bit address bus, 6 bit data bus, and an interrup
 To extend the character set, create a 8x10 binary matrix such as this:
 ![char_map](https://raw.githubusercontent.com/nickbild/fpga_vga_text_mode/main/media/char_map.png)
 
-The numbers shown above are the bit positions (0=least significant, 79=most significant).  Add the bit strings to the `char_set` register array in [top.v](https://github.com/nickbild/fpga_vga_text_mode/blob/main/top.v).
+The numbers shown above are the bit positions (0=least significant, 79=most significant).  A `1` is used to specify the character pattern, a `0` is background.  Add the bit strings to the `char_set` register array in [top.v](https://github.com/nickbild/fpga_vga_text_mode/blob/main/top.v).
 
 To demonstrate the functionality, I have written some example [Arduino code available here](https://github.com/nickbild/fpga_vga_text_mode/tree/main/arduino_example).
 
