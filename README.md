@@ -17,6 +17,8 @@ To extend the character set, create a 8x10 binary matrix such as this:
 
 The numbers shown above are the bit positions (0=least significant, 79=most significant).  A `1` is used to specify the character pattern, a `0` is background.  Add the bit strings to the `char_set` register array in [top.v](https://github.com/nickbild/fpga_vga_text_mode/blob/main/top.v).
 
+Voltage dividing resistors are required on the RGB lines to bring the voltage down to 0.7V. 357 ohms from the TinyFPGA signals, and 100 ohms to ground.
+
 To demonstrate the functionality, I have written some example [Arduino code available here](https://github.com/nickbild/fpga_vga_text_mode/tree/main/arduino_example).
 
 ## Media
