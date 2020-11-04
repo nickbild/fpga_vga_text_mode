@@ -125,7 +125,7 @@ module top (
       .BYPASS(1'b0)
     );
 
-    reg [79:0] char_set [0:59];
+    reg [79:0] char_set [0:60];
     reg [5:0] char_display [0:1500];
 
     integer i;
@@ -200,6 +200,7 @@ module top (
       char_set[56] <= 80'b00000000011111100111111001111110011111100111111001111110011111100111111000000000; // cursor
       char_set[57] <= 80'b00000000000000000000000000000000000000000000000000000000000000000000000000000000; // blank
       char_set[58] <= 80'b11111111111111111111111111111111111111111111111111111111111111111111111111111111; // filled in
+      char_set[59] <= 80'b00000000011001100110011001111110011111100110011001100110001111000001100000000000; // A
 
       // Blank out display.
       for( i = 0; i < 1500; i = i + 1 )
@@ -301,20 +302,15 @@ module top (
     // Load character data into memory.
     ////
 
-    reg interrupt_active;
-    reg [10:0] screen_position;
-    reg [5:0] char_selection;
+    wire [10:0] screen_position;
+    wire [5:0] char_selection;
+
+    assign screen_position = {a10, a9, a8, a7, a6, a5, a4, a3, a2, a1, a0};
+    assign char_selection = {char_in_5, char_in_4, char_in_3, char_in_2, char_in_1, char_in_0};
 
     always @(negedge clk_20mhz) begin
-      if (interrupt && !interrupt_active) begin
-        interrupt_active = 1;
-
-        // Set character to display, and position.
-        char_selection = {char_in_5, char_in_4, char_in_3, char_in_2, char_in_1, char_in_0};
-        screen_position = {a10, a9, a8, a7, a6, a5, a4, a3, a2, a1, a0};
+      if (interrupt) begin
         char_display[screen_position] <= char_selection;
-
-        interrupt_active = 0;
       end
     end
 
