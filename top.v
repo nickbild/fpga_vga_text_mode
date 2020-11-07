@@ -305,7 +305,12 @@ module top (
     wire [10:0] screen_position;
     wire [5:0] char_selection;
 
-    assign screen_position = {a10, a9, a8, a7, a6, a5, a4, a3, a2, a1, a0};
+    wire [5:0] column;
+    wire [4:0] row;
+
+    assign column = {a5, a4, a3, a2, a1, a0};
+    assign row = {a10, a9, a8, a7, a6};
+    assign screen_position = (row * 50) + column;
     assign char_selection = {char_in_5, char_in_4, char_in_3, char_in_2, char_in_1, char_in_0};
 
     always @(negedge clk_20mhz) begin

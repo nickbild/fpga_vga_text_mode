@@ -10,7 +10,7 @@ By using a text mode interface, memory and processing requirements are greatly r
 
 A TinyFPGA BX has been [programmed](https://github.com/nickbild/fpga_vga_text_mode/blob/main/top.v) to generate an 800x600 @ 60Hz VGA signal.  Each pixel is repeated 2 times horizontally and vertically to yield a resolution of 400x300 pixels.  This space is divided into 50x30 characters of 8x10 pixels each.  A set of 59 characters has been pre-defined, and is easily extensible.
 
-The interface consists of an 11 bit address bus, 6 bit data bus, and an interrupt/latch signal.  To write a character on screen, set the desired address on the address bus (top left character = 0; bottom right pixel = 1,499), and set the code of the pre-defined character (see [top.v](https://github.com/nickbild/fpga_vga_text_mode/blob/main/top.v)) on the data bus.  Writing logic 1 to the interrupt will draw the character on screen.
+The interface consists of an 11 bit address bus, 6 bit data bus, and an interrupt/latch signal.  To write a character on screen, set the desired address on the address bus (a0-a5 = column, a6-a10 = row), and set the code of the pre-defined character (see [top.v](https://github.com/nickbild/fpga_vga_text_mode/blob/main/top.v)) on the data bus.  Writing logic 1 to the interrupt will draw the character on screen.
 
 To extend the character set, create a 8x10 binary matrix such as this:
 ![char_map](https://raw.githubusercontent.com/nickbild/fpga_vga_text_mode/main/media/char_map.png)
